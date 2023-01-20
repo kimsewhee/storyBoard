@@ -1,0 +1,41 @@
+debug: false
+
+logging:
+  level:
+    org.hibernate.type.descriptor.sql.BasicBinder: trace    # 첫번째로 작성하니 오류 없어짐
+    org.iclass.story: debug
+    org.springframework.web.servlet: debug
+
+
+spring:
+  datasource:
+    url:  jdbc:oracle:thin:@localhost:1521:XE
+    username:  c##idev
+    password: 1111
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+  jpa:
+    open-in-view: false
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 100
+  sql:
+    init:
+      mode: always
+  config:
+    activate:
+      on-profile: heroku
+  h2:
+    console:
+      enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+

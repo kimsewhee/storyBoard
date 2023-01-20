@@ -1,0 +1,76 @@
+package org.iclass.story.domain;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
+
+@Getter
+@ToString
+@Table(indexes = {
+        @Index(columnList = "title"),
+        @Index(columnList = "createAt"),
+        @Index(columnList = "createBy")
+})
+@EntityListeners(AuditingEntityListener.class)
+@Entity
+public class Story {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Setter @Column(nullable = false)
+    private String title;
+    @Setter @Column(nullable = false,length = 1000)
+    private String content;
+
+    @Setter
+    private String hashtag;
+
+    @OrderBy("id")  @OneToMany(mappedBy = "story",cascade=CascadeType.ALL)
+    @ToString.Exclude
+    private final Set<StoryComment> storyComments = new LinkedHashSet<>();
+
+    @CreatedDate @Column(nullable = false)
+    private LocalDateTime createAt;
+    @CreatedBy @Column(nullable = false,length = 100)
+    private String createBy;
+    @LastModifiedDate @Column(nullable = false)
+    private LocalDateTime modifiedAt;
+    @LastModifiedBy @Column(nullable = false,length = 100)
+    private String modifiedBy;
+
+    protected Story(){}
+
+    private Story(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
+    public static Story of(String title, String content) {
+        return new Story(title,content);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Story story = (Story) o;
+        return id.equals(story.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+}

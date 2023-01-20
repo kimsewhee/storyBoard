@@ -19,10 +19,11 @@ import java.util.Set;
 @ToString
 @Table(indexes = {
         @Index(columnList = "title"),
+        @Index(columnList = "hashtag"),
         @Index(columnList = "createAt"),
         @Index(columnList = "createBy")
 })
-@EntityListeners(AuditingEntityListener.class)
+//@EntityListeners(AuditingEntityListener.class)
 @Entity
 public class Story {
     @Id
@@ -52,13 +53,14 @@ public class Story {
 
     protected Story(){}
 
-    private Story(String title, String content) {
+    private Story(String title, String content,String hashtag) {
         this.title = title;
         this.content = content;
+        this.hashtag=hashtag;
     }
 
-    public static Story of(String title, String content) {
-        return new Story(title,content);
+    public static Story of(String title, String content,String hashtag) {
+        return new Story(title,content,hashtag);
     }
 
     @Override

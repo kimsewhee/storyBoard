@@ -20,7 +20,7 @@ import java.util.Objects;
         @Index(columnList = "createAt"),
         @Index(columnList = "createBy")
 })
-@EntityListeners(AuditingEntityListener.class)
+//@EntityListeners(AuditingEntityListener.class)
 @Entity
 public class StoryComment {
     @Id

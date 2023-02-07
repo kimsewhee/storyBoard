@@ -20,10 +20,10 @@ import java.util.Set;
 @Table(indexes = {
         @Index(columnList = "title"),
         @Index(columnList = "hashtag"),
-        @Index(columnList = "createAt"),
-        @Index(columnList = "createBy")
+        @Index(columnList = "createdAt"),
+        @Index(columnList = "createdBy")
 })
-//@EntityListeners(AuditingEntityListener.class)
+@EntityListeners(AuditingEntityListener.class)
 @Entity
 public class Story {
     @Id
@@ -43,9 +43,9 @@ public class Story {
     private final Set<StoryComment> storyComments = new LinkedHashSet<>();
 
     @CreatedDate @Column(nullable = false)
-    private LocalDateTime createAt;
+    private LocalDateTime createdAt;
     @CreatedBy @Column(nullable = false,length = 100)
-    private String createBy;
+    private String createdBy;
     @LastModifiedDate @Column(nullable = false)
     private LocalDateTime modifiedAt;
     @LastModifiedBy @Column(nullable = false,length = 100)

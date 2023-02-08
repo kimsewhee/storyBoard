@@ -32,7 +32,7 @@ public class Story {
 
     @Setter @Column(nullable = false)
     private String title;
-    @Setter @Column(nullable = false,length = 1000)
+    @Setter @Column(nullable = false,length = 10000)
     private String content;
 
     @Setter

@@ -34,7 +34,8 @@ class JpaRepositoryTest {
     void whenInsert() {
         long previousCOunt = storyRepository.count();
 
-        Story story = storyRepository.save(Story.of("today is..", "하하하hahaha", "#today"));
+        //Story story =
+        storyRepository.save(Story.of("today is..", "하하하hahaha", "#today"));
         assertThat(storyRepository.count()).isEqualTo(previousCOunt+1);
     }
 

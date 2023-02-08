@@ -23,9 +23,8 @@ import java.util.Set;
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
 })
-@EntityListeners(AuditingEntityListener.class)
 @Entity
-public class Story {
+public class Story extends AuditingFields {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -41,15 +40,6 @@ public class Story {
     @OrderBy("id")  @OneToMany(mappedBy = "story",cascade=CascadeType.ALL)
     @ToString.Exclude
     private final Set<StoryComment> storyComments = new LinkedHashSet<>();
-
-    @CreatedDate @Column(nullable = false)
-    private LocalDateTime createdAt;
-    @CreatedBy @Column(nullable = false,length = 100)
-    private String createdBy;
-    @LastModifiedDate @Column(nullable = false)
-    private LocalDateTime modifiedAt;
-    @LastModifiedBy @Column(nullable = false,length = 100)
-    private String modifiedBy;
 
     protected Story(){}
 

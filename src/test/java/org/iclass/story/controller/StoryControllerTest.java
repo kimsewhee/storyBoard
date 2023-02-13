@@ -27,7 +27,8 @@ public class StoryControllerTest {
         mvc.perform(get("/stories"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.TEXT_HTML))
-                .andExpect(model().attributeExists("articles"));
+                .andExpect(view().name("stories/index"))
+                .andExpect(model().attributeExists("stories"));
     }
 
     @DisplayName("view 게시글 리스트-검색")
@@ -35,7 +36,8 @@ public class StoryControllerTest {
     void storyControllerSearchTest() throws Exception {
         mvc.perform(get("/stories/search"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.TEXT_HTML));
+                .andExpect(content().contentType(MediaType.TEXT_HTML))
+                .andExpect(model().attributeExists("stories/search"));
     }
 
     @DisplayName("view 게시글 리스트-해시태그 검색")
@@ -43,7 +45,8 @@ public class StoryControllerTest {
     void storyControllerHashtagSearchTest() throws Exception {
         mvc.perform(get("/stories/search-hashtag"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.TEXT_HTML));
+                .andExpect(content().contentType(MediaType.TEXT_HTML))
+                .andExpect(model().attributeExists("stories/search-hashtag"));
     }
 
     @DisplayName("view 게시글 - 상세보기")
@@ -52,6 +55,8 @@ public class StoryControllerTest {
         mvc.perform(get("/stories/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.TEXT_HTML))
-                .andExpect(model().attributeExists("article"));
+                .andExpect(view().name("stories/detail"))
+                .andExpect(model().attributeExists("story"))
+                .andExpect(model().attributeExists("storyComments"));
     }
 }

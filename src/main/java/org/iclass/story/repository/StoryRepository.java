@@ -11,11 +11,14 @@ import org.springframework.data.querydsl.binding.QuerydslBindings;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
-public interface StoryRepository extends JpaRepository<Story,Long> , QuerydslPredicateExecutor<Story>, QuerydslBinderCustomizer<QStory> {
+public interface StoryRepository extends JpaRepository<Story,Long> ,
+        QuerydslPredicateExecutor<Story>,       //기본 검색기능 추가(테스트는 아래 코드 모두 없이 대소문자 구분, 부분 검색 되는지 확인하기)
+        QuerydslBinderCustomizer<QStory>        //부분 검색기능 추가. 메소드 오버라이딩 필요
+{
 
     @Override
     default void customize(QuerydslBindings bindings, QStory root){
-        bindings.excludeUnlistedProperties(true);
+        bindings.excludeUnlistedProperties(true);       //리스팅되지 않은 속성은 제외시키기
         bindings.including(root.title,root.content,root.hashtag,root.createdAt,root.createdBy);
         bindings.bind(root.title).first(StringExpression::containsIgnoreCase);
         bindings.bind(root.content).first(StringExpression::containsIgnoreCase);

@@ -13,7 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @DisplayName("view 컨트롤러-게시글")
-@WebMvcTest
+@WebMvcTest(StoryController.class)          //StoryController.class 만 테스트
 public class StoryControllerTest {
     private final MockMvc mvc;
 

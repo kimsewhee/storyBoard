@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>스토리 보드</title>
 </head>
 <body>
-    <header>
-        header
-        <hr>
-    </header>
+    <header th:replace="header :: header"></header>
     <main>
         <form>
             <label for="search-type" hidden="hidden">유형</label>
@@ -53,7 +50,6 @@
                 </tr>
             </tbody>
         </table>
-    </main>
     <nav>
         <table>
             <tr>
@@ -66,8 +62,7 @@
             </tr>
         </table>
     </nav>
-    <footer>
-        footer
-    </footer>
+    </main>
+    <footer th:replace="footer :: footer"></footer>
 </body>
 </html>

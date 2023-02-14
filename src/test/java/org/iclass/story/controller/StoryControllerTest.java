@@ -36,7 +36,7 @@ public class StoryControllerTest {
     void storyControllerSearchTest() throws Exception {
         mvc.perform(get("/stories/search"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.TEXT_HTML))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(model().attributeExists("stories/search"));
     }
 
@@ -45,7 +45,7 @@ public class StoryControllerTest {
     void storyControllerHashtagSearchTest() throws Exception {
         mvc.perform(get("/stories/search-hashtag"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.TEXT_HTML))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(model().attributeExists("stories/search-hashtag"));
     }
 
@@ -54,7 +54,7 @@ public class StoryControllerTest {
     void whenStoryViewRequesting_thenReturnStoryOne() throws Exception {
         mvc.perform(get("/stories/1"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.TEXT_HTML))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(view().name("stories/detail"))
                 .andExpect(model().attributeExists("story"))
                 .andExpect(model().attributeExists("storyComments"));

@@ -1,13 +1,20 @@
 package org.iclass.story.domain;
 
+import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
-
+@Getter
+@ToString
+@Table(indexes = {
+        @Index(columnList = "userId"),
+        @Index(columnList = "email", unique = true),
+        @Index(columnList = "createdAt"),
+        @Index(columnList = "createdBy")
+})
+@Entity
 public class UserAccount extends AuditingFields {
 
     @Id

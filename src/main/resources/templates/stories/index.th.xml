@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
 <thlogic>
-    <attr sel="#header" th:replace="header :: header" />
+    <attr sel="#header" th:replace="header :: header" />  <!--첫번째 header는 파일위치&파일명, 두번쨰 header? 는 선택자 문법과 동일-->
     <attr sel="#footer" th:replace="footer :: footer" />
 </thlogic>

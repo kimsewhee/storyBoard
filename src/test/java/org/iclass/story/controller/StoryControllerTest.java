@@ -26,7 +26,7 @@ public class StoryControllerTest {
     void storyControllerTest() throws Exception {   //get import 는 ctrl+스페이스바 후 alt+enter
         mvc.perform(get("/stories"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))        //text/html;charset=UTF-8
                 .andExpect(view().name("stories/index"))
                 .andExpect(model().attributeExists("stories"));
     }

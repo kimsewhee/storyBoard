@@ -2,8 +2,10 @@ package org.iclass.story;
 
 import org.iclass.story.config.JpaConfig;
 import org.iclass.story.domain.Story;
+import org.iclass.story.domain.UserAccount;
 import org.iclass.story.repository.StoryCommentRepository;
 import org.iclass.story.repository.StoryRepository;
+import org.iclass.story.repository.UserAccountRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +23,15 @@ class JpaRepositoryTest {
 
     private final StoryRepository storyRepository;
     private final StoryCommentRepository storyCommentRepository;
+    private final UserAccountRepository userAccountRepository;
 
     public JpaRepositoryTest(
             @Autowired  StoryRepository storyRepository,
-            @Autowired  StoryCommentRepository storyCommentRepository) {
+            @Autowired  StoryCommentRepository storyCommentRepository,
+            @Autowired UserAccountRepository userAccountRepository) {
         this.storyRepository = storyRepository;
         this.storyCommentRepository = storyCommentRepository;
+        this.userAccountRepository = userAccountRepository;
     }
 
     @DisplayName("insert 테스트")
@@ -34,8 +39,9 @@ class JpaRepositoryTest {
     void whenInsert() {
         long previousCOunt = storyRepository.count();
 
-        //Story story =
-        storyRepository.save(Story.of("today is..", "하하하hahaha", "#today"));
+        UserAccount userAccount = userAccountRepository.save(UserAccount.of("kok", "ppw", null, null, null));
+        Story story = Story.of(userAccount,"today is..", "하하하hahaha", "#today");
+        storyRepository.save(story);
         assertThat(storyRepository.count()).isEqualTo(previousCOunt+1);
     }
 

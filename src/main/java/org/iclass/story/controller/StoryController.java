@@ -20,8 +20,8 @@ public class StoryController {
 
     @GetMapping("/{storyId}")
     public String story(@PathVariable Long storyId, ModelMap map){
-    //    map.addAttribute("story", "story");
-   //     map.addAttribute("storyComments", List.of());
+     map.addAttribute("story", "story");
+     map.addAttribute("storyComments", List.of());
         return "stories/detail";
     }
 

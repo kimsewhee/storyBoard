@@ -3,7 +3,6 @@ package org.iclass.story.domain;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.apache.catalina.User;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
@@ -21,7 +20,7 @@ import java.util.Set;
 @Entity
 public class Story extends AuditingFields {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)     //MySql 의 auto_increment 이용하는 방식
+    @GeneratedValue(strategy = GenerationType.IDENTITY)     //MySql 의 auto_increment 이용하는 방식. 오라클도 잘됨.
     private Long id;
     /*
         @Entity
@@ -100,9 +99,18 @@ public class Story extends AuditingFields {
         this.content = content;
         this.hashtag = hashtag;
     }
+    private Story( String title, String content, String hashtag) {
+        this.title = title;
+        this.content = content;
+        this.hashtag = hashtag;
+    }
 
     public static Story of(UserAccount userAccount,String title, String content,String hashtag) {
         return new Story(userAccount,title,content,hashtag);
+    }
+
+    public static Story of(String title, String content,String hashtag) {
+        return new Story(title,content,hashtag);
     }
 
     @Override

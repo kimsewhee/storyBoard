@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Getter
-@ToString
+@ToString(callSuper = true)     //부모클래스 필드 포함해서 메소드 정의됩니다.
 @Table(indexes = {
         @Index(columnList = "content"),
         @Index(columnList = "createdAt"),
@@ -19,19 +19,20 @@ public class StoryComment extends AuditingFields{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Setter @ManyToOne(optional = false)
-    private Story story;
+    @Setter @ManyToOne(optional = false)  private Story story;
+    @Setter @ManyToOne(optional = false)  private UserAccount userAccount;
     @Setter @Column(nullable = false,length = 500)
     private String content;
 
     protected StoryComment(){}
-    private StoryComment(Story story, String content) {
+    private StoryComment(Story story, UserAccount userAccount,String content) {
         this.story = story;
+        this.userAccount=userAccount;
         this.content = content;
     }
 
-    public static StoryComment of(Story story,String content){
-        return new StoryComment(story,content);
+    public static StoryComment of(Story story,UserAccount userAccount,String content){
+        return new StoryComment(story,userAccount,content);
     }
 
     @Override

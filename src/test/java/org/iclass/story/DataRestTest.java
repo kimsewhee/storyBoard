@@ -1,11 +1,13 @@
 package org.iclass.story;
 
+import org.iclass.story.config.TestSecurityConfig;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,8 +18,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Disabled("spring data rest 테스트 후 비활성화")
+//@Disabled("spring data rest 테스트 후 비활성화")
 @DisplayName("Data REST - API 테스트")
+@Import(TestSecurityConfig.class)
 @Transactional
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -71,15 +74,16 @@ public class DataRestTest {
     }
 // application 실행하고 브라우저에서 http://localhost:8081/api/ 요청하면 hal explorer 실행된다.
 
-    @DisplayName("/api 회원 관련은 제공하지 않는다.")
+    @DisplayName("/api 회원 관련은 제공하지 않는다.-스프링 시큐리티 기본 적용하고 테스트")
     @Test
     void requestUserAccountTest() throws Exception {
         mvc.perform(get("/api/userAccounts")).andExpect(status().isNotFound());
-        mvc.perform(post("/api/userAccounts")).andExpect(status().isNotFound());
-        mvc.perform(put("/api/userAccounts")).andExpect(status().isNotFound());
-        mvc.perform(patch("/api/userAccounts")).andExpect(status().isNotFound());
-        mvc.perform(delete("/api/userAccounts")).andExpect(status().isNotFound());
+        mvc.perform(post("/api/userAccounts")).andExpect(status().isForbidden());
+        mvc.perform(put("/api/userAccounts")).andExpect(status().isForbidden());
+        mvc.perform(patch("/api/userAccounts")).andExpect(status().isForbidden());
+        mvc.perform(delete("/api/userAccounts")).andExpect(status().isForbidden());
         mvc.perform(head("/api/userAccounts")).andExpect(status().isNotFound());
+
 
     }
 }

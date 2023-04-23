@@ -87,7 +87,8 @@ public class Story extends AuditingFields {
     @Setter
     private String hashtag;
 
-    @OrderBy("createdAt DESC")  @OneToMany(mappedBy = "story",cascade=CascadeType.ALL)
+    @OrderBy("createdAt DESC")
+    @OneToMany(mappedBy = "story",cascade=CascadeType.ALL)
     @ToString.Exclude
     private final Set<StoryComment> storyComments = new LinkedHashSet<>();
 

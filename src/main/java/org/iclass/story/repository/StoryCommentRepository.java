@@ -10,9 +10,15 @@ import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
 import org.springframework.data.querydsl.binding.QuerydslBindings;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
+import java.util.List;
+
 @RepositoryRestResource
 public interface StoryCommentRepository
-        extends JpaRepository<StoryComment,Long> ,QuerydslPredicateExecutor<StoryComment>, QuerydslBinderCustomizer<QStoryComment> {
+        extends JpaRepository<StoryComment,Long> ,
+        QuerydslPredicateExecutor<StoryComment>,
+        QuerydslBinderCustomizer<QStoryComment> {
+
+    List<StoryComment> findByStory_Id(Long storyId);        //댓글의 Id 가 아닌 Story 의 Id
 
     @Override
     default void customize(QuerydslBindings bindings, QStoryComment root){

@@ -2,7 +2,10 @@
 -- TODO: 테스트용이지만 비밀번호가 노출된 데이터 세팅. 개선하는 것이 좋을 지 고민해 보자.
 insert into user_account (user_id, user_password, nickname, email, memo, created_at, created_by, modified_at, modified_by) values
     ('korsec', 'asdf1234', 'korsec', 'korsec@mail.com', 'hi!! I am korsec.', systimestamp, 'korsec', systimestamp, 'korsec');
-
+insert into user_account (user_id, user_password, nickname, email, memo, created_at, created_by, modified_at, modified_by) values
+    ('momo', 'asdf1234', 'korsec', 'momo@mail.com', 'hi!! I am momo.', systimestamp, 'momo', systimestamp, 'momo');
+insert into user_account (user_id, user_password, nickname, email, memo, created_at, created_by, modified_at, modified_by) values
+    ('ren', 'asdf1234', 'korsec', 'ren@mail.com', 'hi!! I am ren.', systimestamp, 'ren', systimestamp, 'ren');
 -- 123 게시글
 insert into story (user_account_id,title, content, hashtag, created_by, modified_by, created_at, modified_at) values (1,'Quisque ut erat.', 'Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.
 Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.

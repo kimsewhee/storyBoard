@@ -54,12 +54,12 @@ class StoryServiceTest {        //mockito 테스트
         SearchType searchType = SearchType.TITLE;
         String searchKeyword = "title";
         Pageable pageable = Pageable.ofSize(20);
-        given(storyRepository.findByTitle(searchKeyword,pageable)).willReturn(Page.empty());
+        given(storyRepository.findByTitleContaining(searchKeyword,pageable)).willReturn(Page.empty());
         //when
         Page<StoryDto> stories = sut.searhStories(searchType,searchKeyword,pageable);
         //then
         assertThat(stories).isEmpty();
-        then(storyRepository).should().findByTitle(searchKeyword,pageable);
+        then(storyRepository).should().findByTitleContaining(searchKeyword,pageable);
     }
 
 

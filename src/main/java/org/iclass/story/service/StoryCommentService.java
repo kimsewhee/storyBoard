@@ -18,11 +18,19 @@ public class StoryCommentService {
     private final StoryCommentRepository storyCommentRepository;
 
     @Transactional(readOnly = true)
-    public List<StoryCommentDto> searchStroyComment(Long storyId){
+    public List<StoryCommentDto> searchStroyComments(Long storyId){
         return List.of();
     }
 
     public void saveStoryComment(StoryCommentDto dto){
+
+    }
+
+    public void updateStoryComment(StoryCommentDto dto){
+
+    }
+
+    public void deleteStoryComment(Long storyCommentId){
 
     }
 }

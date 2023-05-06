@@ -59,6 +59,18 @@ class JpaRepositoryTest {
                 .hasSize(123);
     }
 
+    @DisplayName("")
+    @Test
+    public void given_when_then() {
+        //given
+       java.util.Optional<Story> story = storyRepository.findById(23L);
+        //when
+        assertThat(story)
+                .isNotNull();
+        //then
+        System.out.println("****"+story);
+    }
+
     @DisplayName("update 테스트")
     @Test
     void givenTestData_whenUpdating_thenWorksFine() {

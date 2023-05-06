@@ -4,6 +4,8 @@ import com.querydsl.core.types.dsl.DateTimeExpression;
 import com.querydsl.core.types.dsl.StringExpression;
 import org.iclass.story.domain.QStory;
 import org.iclass.story.domain.Story;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
@@ -16,6 +18,11 @@ public interface StoryRepository extends JpaRepository<Story,Long> ,
         QuerydslBinderCustomizer<QStory>        //부분 검색기능 추가. 메소드 오버라이딩 필요
 {
 
+    Page<Story> findByTitleContaining(String title, Pageable pageable);
+    Page<Story> findByContentContaining(String content, Pageable pageable);
+    Page<Story> findByUserAccount_UserIdContaining(String userId, Pageable pageable);
+    Page<Story> findByUserAccount_NicknameContaining(String nicknamae, Pageable pageable);
+    Page<Story> findByHashtag(String hashtag, Pageable pageable);
     @Override
     default void customize(QuerydslBindings bindings, QStory root){
         bindings.excludeUnlistedProperties(true);       //리스팅되지 않은 속성은 제외시키기

@@ -2,4 +2,35 @@
 <thlogic>
     <attr sel="#header" th:replace="header :: header" />  <!--첫번째 header는 파일위치&파일명, 두번쨰 header? 는 선택자 문법과 동일-->
     <attr sel="#footer" th:replace="footer :: footer" />
+
+    <attr sel="#story-table">
+        <attr sel="tbody" th:remove="all-but-first">  <!-- tbody 자식을 1개만 두고 모두 삭제 : mockup 테스트용 지우기-->
+            <attr sel="tr[0]" th:each="story: ${stories}">
+                <attr sel="td.title/a" th:text="${story.title}" th:href="@{'/stories/'+${story.id}}"/>
+                <attr sel="td.hashtag" th:text="${story.hashtag}"/>
+                <attr sel="td.user-id" th:text="${story.nickname}"/>
+                <attr sel="td.created-at/time" th:datetime="${story.createdAt}" th:text="${#temporals.format(story.createdAt,'yyyy-MM-dd')}"/>
+            </attr>
+        </attr>
+    </attr>
+
+    <attr sel="#pagination">
+        <attr sel="li[0]/a"
+              th:text="'previous'"
+              th:href="@{/stories(page=${stories.number - 1})}"
+              th:class="'page-link' + (${stories.number} <= 0 ? ' disabled' : '')"
+        />
+        <attr sel="li[1]" th:class="page-item" th:each="pageNumber : ${paginationBarNumbers}">
+            <attr sel="a"
+                  th:text="${pageNumber + 1}"
+                  th:href="@{/stories(page=${pageNumber})}"
+                  th:class="'page-link' + (${pageNumber} == ${stories.number} ? ' disabled' : '')"
+            />
+        </attr>
+        <attr sel="li[2]/a"
+              th:text="'next'"
+              th:href="@{/stories(page=${stories.number + 1})}"
+              th:class="'page-link' + (${stories.number} >= ${stories.totalPages - 1} ? ' disabled' : '')"
+        />
+    </attr>
 </thlogic>

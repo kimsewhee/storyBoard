@@ -1,10 +1,14 @@
 -- 테스트 계정
 -- TODO: 테스트용이지만 비밀번호가 노출된 데이터 세팅. 개선하는 것이 좋을 지 고민해 보자.
 insert into user_account (user_id, user_password, nickname, email, memo, created_at, created_by, modified_at, modified_by) values
-    ('korsec', 'asdf1234', 'korsec', 'korsec@mail.com', 'hi!! I am korsec.', systimestamp, 'korsec', systimestamp, 'korsec');
-
+    ('korsec', 'asdf1234', 'korsec', 'korsec@mail.com', 'hi!! I am korsec.', '2020-05-23 08:34:54', 'korsec', '2020-05-25 08:34:54', 'korsec');
+insert into user_account (user_id, user_password, nickname, email, memo, created_at, created_by, modified_at, modified_by) values
+    ('momo', 'asdf1234', 'momo', 'momo@mail.com', 'hi!! I am momo.', '2020-05-24 08:34:54', 'momo', '2020-05-26 08:34:54', 'momo');
+insert into user_account (user_id, user_password, nickname, email, memo, created_at, created_by, modified_at, modified_by) values
+    ('ren', 'asdf1234', 'ren', 'ren@mail.com', 'hi!! I am ren.', '2020-05-25 08:34:54', 'ren', '2020-05-27 08:34:54', 'ren');
 -- 123 게시글
-insert into story (user_account_id,title, content, hashtag, created_by, modified_by, created_at, modified_at) values (1,'Quisque ut erat.', 'Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.
+insert into story (user_account_id,title, content, hashtag, created_by, modified_by, created_at, modified_at) values
+(1,'Quisque ut erat.', 'Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.
 Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.
 Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.', '#pink', 'Kamilah', 'Murial', '2021-05-30 23:53:46', '2021-03-10 08:48:50');
 insert into story (user_account_id,title, content, hashtag, created_by, modified_by, created_at, modified_at) values (1,'Morbi ut odio.', 'Phasellus in felis. Donec semper sapien a libero. Nam dui.

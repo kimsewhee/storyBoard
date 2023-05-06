@@ -2,4 +2,20 @@
 <thlogic>
     <attr sel="#header" th:replace="header :: header" />
     <attr sel="#footer" th:replace="footer :: footer" />
+
+    <attr sel="#story-main" th:object="${story}">
+        <attr sel="#story-header/h1" th:text="*{title}"/>
+        <attr sel="#nickname" th:text="*{nickname}"/>
+        <attr sel="#email" th:text="*{email}"/>
+        <attr sel="#created-at" th:datetime="*{createdAt}" th:text="*{#temporals.format(createdAt,'yyyy-MM-dd')}"/>
+        <attr sel="#hashtag" th:text="*{hashtag}"/>
+        <attr sel="#story-content" th:text="*{content}"/>
+    </attr>
+    <attr sel="#story-comments" th:remove="all-but-first">
+        <attr sel="li[0]" th:each="storyComment: ${storyComments}">
+            <attr sel="div/strong" th:text="${storyComment.nickname}"/>
+            <attr sel="div/small//time" th:datetime="${storyComment.createdAt}" th:text="${#temporals.format(storyComment.createdAt,'yyyy-MM-dd')}"/>
+            <attr sel="div/p" th:text="${storyComment.content}"/>
+        </attr>
+    </attr>
 </thlogic>

@@ -81,13 +81,14 @@ public class Story extends AuditingFields {
      */
     @Setter @Column(nullable = false)
     private String title;
-    @Setter @Column(nullable = false,length = 10000)
+    @Setter @Column(nullable = false,length = 10000) @Lob       //오라클은 4000바이트 이상은 CLOB 타입
     private String content;
 
     @Setter
     private String hashtag;
 
-    @OrderBy("createdAt DESC")  @OneToMany(mappedBy = "story",cascade=CascadeType.ALL)
+    @OrderBy("createdAt DESC")
+    @OneToMany(mappedBy = "story",cascade=CascadeType.ALL)
     @ToString.Exclude
     private final Set<StoryComment> storyComments = new LinkedHashSet<>();
 

@@ -3,33 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>스토리 보드</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="/css/articles/article-content.css" rel="stylesheet">
 </head>
 <body>
-    <header id="header"></header>
-    <main>
-        <header>
+    <header id="header">
+        헤더
+        <hr>
+    </header>
+    <main id="story-main" class="container">
+        <header class="py-5 text-center" id="story-header">
             <h1>첫번째 스토리</h1>
         </header>
-        <aside>
-            <p>korsec</p>
-            <p><a href="mailto:korsec@gmil.com">korsec@gmil.com"</a> </p>
-            <p><time datetime="2023-01-31T00:00:00">2023-01-31</time></p>
-            <p>#java</p>
-        </aside>
-        <section>
-          <p>본문<br><br></p>
-          <div>
-            <form>
-              <label for="storyComment" hidden>댓글</label>
-              <textarea id="storyComment" placeholder="댓글 쓰기..." rows="3"></textarea>
-              <button type="submit">쓰기</button>
+        <div class="row g-5">
+            <section class="col-md-5 col-lg-4 order-md-last">
+                <aside>
+                    <p><span id="nickname">korsec</span></p>
+                    <p><a id="email" href="mailto:korsec@gmil.com">korsec@gmil.com"</a> </p>
+                    <p><time id="created-at" datetime="2023-01-31T00:00:00">2023-01-31</time></p>
+                    <p><span id="hashtag">#java</span></p>
+                </aside>
+            </section>
+            <article id="story-content" class="col-md-7 col-lg-8">
+                <pre>본문<br><br></pre>
+            </article>
+         </div>
+          <div class="row g-5">
+            <section>
+            <form class="row g-3">
+                <div class="col-8">
+                    <label for="comment-textbox" hidden>댓글</label>
+                    <textarea class="form-control" id="comment-textbox" placeholder="댓글 쓰기..." rows="3"></textarea>
+                </div>
+                <div class="col-auto">
+                    <label for="comment-submit" hidden>댓글 쓰기</label>
+                    <button type="submit" id="comment-submit" class="btn btn-primary">쓰기</button>
+                </div>
             </form>
-
-            <ul>
+            <ul id="story-comments" class="row col-7">
               <li>
                 <div>
-                  <time><small>2022-01-01</small></time>
                   <strong>Uno</strong>
+                  <small><time>2022-01-01</time></small>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
                     Lorem ipsum dolor sit amet
@@ -38,22 +53,38 @@
               </li>
               <li>
                 <div>
-                  <time><small>2022-01-01</small></time>
                   <strong>Uno</strong>
-                  <p>
+                  <small><time>2022-01-01</time></small>
+                    <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
                     Lorem ipsum dolor sit amet
                   </p>
                 </div>
               </li>
             </ul>
+            </section>
           </div>
-          <nav>
-            <a href="#">이전 글</a>
-            <a href="#">다음 글</a>
-          </nav>
-        </section>
+          <div class="row g-5">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo; prev</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">next &raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+              </nav>
+          </div>
     </main>
-    <footer id="footer"></footer>
+    <footer id="footer">
+        <hr>
+        푸터
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
 </html>

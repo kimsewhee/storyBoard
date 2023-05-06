@@ -21,6 +21,7 @@ import javax.persistence.EntityNotFoundException;
 public class StoryService {
 
     private final StoryRepository storyRepository;
+
     @Transactional(readOnly = true)
     public Page<StoryDto> searhStories(SearchType searchType, String searchKeyword, Pageable pageable) {
         if(searchKeyword==null || searchKeyword.isBlank()){
@@ -36,9 +37,8 @@ public class StoryService {
         };
     }
 
-    @Transactional(readOnly = true)
-    public StoryWithCommentsDto getStory(long storyId){
-
+   // @Transactional(readOnly = true)
+    public StoryWithCommentsDto getStory(Long storyId){
         return storyRepository.findById(storyId)
                 .map(StoryWithCommentsDto::from)
                 .orElseThrow(()-> new EntityNotFoundException("게시글이 없습니다.- storyId: " + storyId));

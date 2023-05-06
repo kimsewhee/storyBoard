@@ -67,11 +67,11 @@ class StoryServiceTest {        //mockito 테스트
     @Test
     public void givenId_whenSearching_thenReturnStory() {
         //given
-        Long storyId = 1L;
+        Long storyId = 23L;
         Story story = createStory();
         given(storyRepository.findById(storyId)).willReturn(Optional.of(story));
         //when
-        StoryWithCommentsDto dto = sut.getStory(1L);
+        StoryWithCommentsDto dto = sut.getStory(storyId);
         //then
         assertThat(dto)
                 .hasFieldOrPropertyWithValue("title",story.getTitle())
@@ -95,6 +95,7 @@ class StoryServiceTest {        //mockito 테스트
                 .isInstanceOf(EntityNotFoundException.class)
                 .hasMessage("조회한 게시글이 없습니다. - storyId:" + storyId);
         then(storyRepository).should().findById(storyId);
+
     }
     
     @DisplayName("게시글을 입력하면 게시글 정보를 생성한다.")

@@ -81,7 +81,7 @@ public class Story extends AuditingFields {
      */
     @Setter @Column(nullable = false)
     private String title;
-    @Setter @Column(nullable = false,length = 10000)
+    @Setter @Column(nullable = false,length = 10000) @Lob       //오라클은 4000바이트 이상은 CLOB 타입
     private String content;
 
     @Setter

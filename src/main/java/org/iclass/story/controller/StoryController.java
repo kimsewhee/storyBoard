@@ -3,8 +3,10 @@ package org.iclass.story.controller;
 import lombok.RequiredArgsConstructor;
 import org.iclass.story.response.StoryResponse;
 import org.iclass.story.response.StoryWithCommentsResponse;
+import org.iclass.story.service.PaginationService;
 import org.iclass.story.service.StoryService;
 import org.iclass.story.type.SearchType;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -22,6 +24,7 @@ import java.util.List;
 @Controller
 public class StoryController {
     private final StoryService storyService;
+    private final PaginationService paginationService;
 
     public String stories_(ModelMap map) {
         map.addAttribute("stories", List.of());
@@ -34,8 +37,11 @@ public class StoryController {
             @PageableDefault(size = 10,sort = "createdAt",direction = Sort.Direction.DESC)Pageable
              pageable,ModelMap map){
 
-        map.addAttribute("stories",storyService.searhStories(searchType,searchValue,pageable)
-                .map(StoryResponse::from));
+        Page<StoryResponse> stories = storyService.searhStories(searchType,searchValue,pageable)
+                .map(StoryResponse::from);
+        List<Integer> barNumbers = paginationService.getPaginationBarNumbers(pageable.getPageNumber(),stories.getTotalPages());
+        map.addAttribute("stories",stories);
+        map.addAttribute("paginationBarNumbers",barNumbers);
         return "stories/index";
     }
 
